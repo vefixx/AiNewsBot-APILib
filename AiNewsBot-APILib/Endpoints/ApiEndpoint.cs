@@ -2,10 +2,15 @@
 
 public abstract class ApiEndpoint
 {
-    protected readonly AiNewsApiClient _apiClient;
+    protected readonly AiNewsApiClient ApiClient;
+    protected readonly string BaseEndpoint;
 
-    public ApiEndpoint(AiNewsApiClient apiClient)
+    public ApiEndpoint(AiNewsApiClient apiClient, string baseEndpoint)
     {
-        _apiClient = apiClient;
+        if (baseEndpoint.StartsWith("/"))
+            baseEndpoint = baseEndpoint.Substring(1);
+
+        BaseEndpoint = baseEndpoint;
+        ApiClient = apiClient;
     }
 }

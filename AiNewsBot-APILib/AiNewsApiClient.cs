@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using AiNewsBot_APILib.Endpoints;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 
@@ -10,10 +11,11 @@ public class AiNewsApiClient
     private const string BaseUrl = "http://localhost:3232/";
 
     // Endpoints
-
+    public AiGatewayEndpoint AiGatewayEndpoint { get; set; }
 
     public AiNewsApiClient()
     {
+        AiGatewayEndpoint = new AiGatewayEndpoint(this, "ai-gateway");
         _client = new HttpClient();
     }
 
@@ -59,4 +61,7 @@ public class AiNewsApiClient
 
     public async Task<T> GetAsync<T>(string endpoint, Dictionary<string, string?>? query = null) =>
         await SendRequestAsync<T>(HttpMethod.Get, BaseUrl + endpoint, null, query);
+
+    public async Task<T> PostAsync<T>(string endpoint, object? data) =>
+        await SendRequestAsync<T>(HttpMethod.Post, BaseUrl + endpoint, data, null);
 }

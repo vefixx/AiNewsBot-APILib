@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiNewsBot-APILib", "AiNewsBot-APILib\AiNewsBot-APILib.csproj", "{72034CD1-C10F-4803-934C-15DD0753E76C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72034CD1-C10F-4803-934C-15DD0753E76C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72034CD1-C10F-4803-934C-15DD0753E76C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72034CD1-C10F-4803-934C-15DD0753E76C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72034CD1-C10F-4803-934C-15DD0753E76C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

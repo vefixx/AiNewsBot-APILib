@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using AiNewsBot_APILib.Endpoints;
+using AiNewsBot_Backend.API.Models;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 
@@ -38,7 +39,7 @@ public class AiNewsApiClient
         return queryParams != null ? QueryHelpers.AddQueryString(url, queryParams) : url;
     }
 
-    private async Task<T> SendRequestAsync<T>(HttpMethod method, string url, object? data = null,
+    private async Task<APIResponse> SendRequestAsync(HttpMethod method, string url, object? data = null,
         Dictionary<string, string?>? queryParams = null)
     {
         string uri = BuildUri(url, queryParams);
@@ -52,16 +53,16 @@ public class AiNewsApiClient
         using var response = await _client.SendAsync(request, HttpCompletionOption.ResponseContentRead);
         string content = await response.Content.ReadAsStringAsync();
 
-        var result = JsonConvert.DeserializeObject<T>(content);
+        var result = JsonConvert.DeserializeObject<APIResponse>(content);
         if (result is null)
             throw new JsonException($"Ответ пустой или не распознан ({uri}).");
 
         return result;
     }
 
-    public async Task<T> GetAsync<T>(string endpoint, Dictionary<string, string?>? query = null) =>
-        await SendRequestAsync<T>(HttpMethod.Get, BaseUrl + endpoint, null, query);
+    public async Task<APIResponse> GetAsync(string endpoint, Dictionary<string, string?>? query = null) =>
+        await SendRequestAsync(HttpMethod.Get, BaseUrl + endpoint, null, query);
 
-    public async Task<T> PostAsync<T>(string endpoint, object? data) =>
-        await SendRequestAsync<T>(HttpMethod.Post, BaseUrl + endpoint, data, null);
+    public async Task<APIResponse> PostAsync(string endpoint, object? data) =>
+        await SendRequestAsync(HttpMethod.Post, BaseUrl + endpoint, data, null);
 }

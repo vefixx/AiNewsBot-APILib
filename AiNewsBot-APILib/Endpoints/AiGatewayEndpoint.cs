@@ -21,10 +21,10 @@ public class AiGatewayEndpoint : ApiEndpoint
         return response.GetData<List<string>>()!;
     }
 
-    public async Task<JobIdData> SummarizePostAsync(PostCreateInfo postCreateInfo)
+    public async Task<JobIdDataDTO> SummarizePostAsync(PostCreateInfoDTO postCreateInfo)
     {
         APIResponse response = await ApiClient.PostAsync(BaseEndpoint + "/summarize-post", postCreateInfo);
-        JobIdData? jobIdData = response.GetData<JobIdData>();
+        JobIdDataDTO? jobIdData = response.GetData<JobIdDataDTO>();
         
         if (jobIdData == null)
             throw new HttpRequestException("Ответ от сервера равен null");
